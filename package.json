@@ -1,0 +1,30 @@
+{
+  "name": "ngx-signature",
+  "version": "1.0.0",
+  "description": "Allow user to sign on your angular app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hashtaagco/ngx-signature.git"
+  },
+  "keywords": [
+    "angular",
+    "signature"
+  ],
+  "author": "Anand Siddharth <anand.siddharth@hotmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hashtaagco/ngx-signature/issues"
+  },
+  "homepage": "https://github.com/hashtaagco/ngx-signature#readme",
+  "dependencies": {
+    "@angular/core": "^4.0.0",
+    "bootstrap": "4.0.0-beta.2",
+    "glfx-es6": "0.0.3",
+    "ngx-image-cropper": "^0.2.6",
+    "signature_pad": "^2.3.2"
+  }
+}
