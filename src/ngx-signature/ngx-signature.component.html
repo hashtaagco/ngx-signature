@@ -1,0 +1,89 @@
+<div class="ngx-signature-modal modal fade" id="ngx-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+    
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h4 class="modal-title">E-Sign</h4>
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+          </div>
+    
+          <!-- Modal body -->
+          <div class="modal-body">
+              <ul class="nav nav-tabs" role="tablist">
+                  <li class="nav-item">
+                    <a class="nav-link active" href="#draw" (click)="activateDrawTab()" role="tab" data-toggle="tab"> <i class="fa fa-edit"></i> Draw</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#camera" (click)="activateCameraTab()" role="tab" data-toggle="tab"> <i class="fa fa-camera"></i> Snap</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#upload" (click)="activateUploadTab()" role="tab" data-toggle="tab"> <i class="fa fa-image"></i> Upload</a>
+                  </li>
+              </ul>
+              <div role="tabpanel" class="tab-pane active" id="draw">
+                  <span class="draw-text">You can sign using your touchpad or mouse inside rectangular area</span>
+                  <canvas #signaturePad height="300" width="470" class="signature-pad"></canvas>
+                  <button (click)="clearDrawing()" class="btn btn-light">Clear</button>
+                  <button (click)="doneDrawing()" class="btn btn-primary pull-right">
+                    Done
+                  </button>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="upload">
+                  <div *ngIf="!selected" class="upload" [ngClass]="{'dragging' : dragging}">
+                    <input type="file" (change)="uploadFileChange($event)" #fileUpload >
+                    <button *ngIf="!dragging" class="btn">
+                      <i class="fa fa-upload"></i> Select a file to upload
+                    </button>
+                    <button *ngIf="dragging" class="btn btn-light">
+                      Drop file here to upload
+                    </button>
+                  </div>
+                  <div *ngIf="selected" class="image">
+                      <span class="crop-text">Crop the image to the best fit</span>
+                      <image-cropper
+                        [imageChangedEvent]="uploadFileChangedEvent"
+                        [maintainAspectRatio]="false"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded()"
+                        (loadImageFailed)="loadImageFailed()"
+                      ></image-cropper>
+                      <br>
+                      <button (click)="doneCropping()" class="btn btn-primary pull-right">
+                        Done
+                      </button>
+                  </div>
+              </div>
+              <div role="tabpanel" class="tab-pane fade" id="camera">
+                  <div *ngIf="!selected" class="capture">
+                      <span class="camera-text">Put signature near your camera and click on take snapshot</span>
+                      <canvas #cameraSnapshot height="300" width="470" style="display:none"></canvas>
+                    
+                      <video  #camera height="300" width="470" class="signature-pad"></video>
+                      <button class="btn btn-primary btn-block" (click)="takeSnapshot()">Take Snapshot</button>
+                  </div>
+                  <div *ngIf="selected" class="capture">
+                      <span class="crop-text">Crop the image to the best fit</span>
+                      <image-cropper
+                        [imageBase64]="capturedImage"
+                        [maintainAspectRatio]="false"
+                        format="png"
+                        (imageCropped)="imageCropped($event)"
+                        (imageLoaded)="imageLoaded()"
+                        (loadImageFailed)="loadImageFailed()"
+                      ></image-cropper>
+                      <button (click)="retakeSnapshot()" class="btn btn-light">Retake Snapshot</button>
+                      
+                      <button (click)="doneCropping()" class="btn btn-primary pull-right">
+                        Done
+                      </button>
+                  </div>
+              </div>
+          </div>
+    
+
+    
+        </div>
+      </div>
+</div>

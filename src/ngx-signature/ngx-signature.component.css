@@ -1,0 +1,50 @@
+.upload {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    padding: 15px;
+    width: 100%;
+    min-height: 100px;
+    border: 2px dashed #c0c0c0;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+.upload input[type='file']{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+.upload.dragging {
+    border: 2px dashed #212121;
+
+}
+
+:host image-cropper> .cropper {
+    outline-color: rgba(1, 1, 1, 0.2);
+}
+.crop-text, .draw-text, .camera-text{
+    display: block;
+    text-align: center;
+    padding-top: 15px;
+    padding-bottom: 5px;
+    font-size: 14px;
+}
+
+.tab-pane{
+    display: none;
+}
+.tab-pane.active{
+    display: block;
+}
+
+.signature-pad {
+    border: 1px solid black;
+    border-radius: 5px;
+}
