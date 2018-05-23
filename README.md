@@ -11,5 +11,5 @@ Allow user to sign on your angular app
 
 # Screenshot
 
-<p align="center"><img src="https://raw.githubusercontent.com/hashtaagco/ngx-signature/master/raw/sign.png" alt="ngx-signature screenshot">
+<p align="center"><img width="500" src="https://raw.githubusercontent.com/hashtaagco/ngx-signature/master/raw/sign.png" alt="ngx-signature screenshot">
 </p>
