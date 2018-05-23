@@ -3,6 +3,10 @@ import { HostListener } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import * as SignaturePad from 'signature_pad';
 import * as fx from 'glfx-es6'
+import { Output } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+
+
 
 declare const $;
 
@@ -18,6 +22,8 @@ export class NgxSignatureComponent implements OnInit {
   capturedImage;
   croppedImage;
 
+  @Output() onSignatureDone:EventEmitter<string> = new EventEmitter<string>();
+
   responseImage;
   @ViewChild('fileUpload') fileInputField;
   @ViewChild('signaturePad') signaturePadCanvas;
@@ -31,10 +37,10 @@ export class NgxSignatureComponent implements OnInit {
   ngOnInit() {
 
     this.signaturePad = new SignaturePad.default(this.signaturePadCanvas.nativeElement);
-    $('#ngx-modal').on('hidden.bs.modal',  () => {
+    $('#ngx-signature').on('hidden.bs.modal',  () => {
       this.resetModal();
     }); 
-    $('#ngx-modal').on('show.bs.modal',  () => {
+    $('#ngx-signature').on('show.bs.modal',  () => {
       $("a[href='#draw']").click();
     }); 
   }
@@ -91,12 +97,14 @@ export class NgxSignatureComponent implements OnInit {
 
   doneCropping(){
     this.responseImage = this.croppedImage;
-    $("#ngx-modal").modal('hide');
+    this.onSignatureDone.emit(this.responseImage);
+    $("#ngx-signature").modal('hide');
   }
 
   doneDrawing(){
     this.responseImage = this.signaturePad.toDataURL();
-    $("#ngx-modal").modal('hide');
+    this.onSignatureDone.emit(this.responseImage);
+    $("#ngx-signature").modal('hide');
   }
 
 
